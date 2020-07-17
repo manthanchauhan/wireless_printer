@@ -25,6 +25,7 @@ SECRET_KEY = 'wwt+a00*da=p2jga*%c%&_f5vwpi_lhb-kkq5fjj*(q1^9++(+'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '10.11.55.180',
     'print.in',
     '192.168.0.13',
     '127.0.0.1',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'print',
     'crispy_forms',
+    'text_share',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

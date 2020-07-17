@@ -2,24 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Print</title>
+    <title>Text Share</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
     <div class="">
-        <form method="post" action="{% url 'print_file' %}" enctype="multipart/form-data">
+        <form method="post" action="{% url 'text_share' %}">
             {% csrf_token %}
             {{form|crispy}}
-            <button type="submit" class="btn btn-success">Print</button>
+            <button type="submit" class="btn btn-success">Share</button>
         </form>
-    </div>
-    <hr>
-    <div>
-        <h4>Important Links:</h4>
-        <ol>
-            <li><a href="{% url 'text_share' %}">Share Text</a></li>
-        </ol>
     </div>
 </body>
 </html>
