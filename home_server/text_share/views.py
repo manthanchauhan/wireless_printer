@@ -6,7 +6,6 @@ from .models import SavedText
 def view_shared_text(request):
     if request.method == 'GET':
         saved_text = list(SavedText.objects.all())
-        print(saved_text)
         if not saved_text:
             form = TextShare()
         else:
