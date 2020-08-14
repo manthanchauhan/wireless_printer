@@ -4,4 +4,7 @@ function copyText() {
     textField.select();
 
     document.execCommand("copy");
+
+    textField.blur();
+
 }
