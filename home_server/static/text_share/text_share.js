@@ -6,5 +6,10 @@ function copyText() {
     document.execCommand("copy");
 
     textField.blur();
+}
 
+document.getElementById("id_content").addEventListener("click", clearText);
+
+function clearText(event) {
+    event.target.value = "";
 }
