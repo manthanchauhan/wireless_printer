@@ -14,12 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from print.views import print_file
-from text_share.views import view_shared_text
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', print_file, name='print_file'),
-    path('text_share', view_shared_text, name='text_share'),
+    path('text_share/', include('text_share.urls')),
 ]
