@@ -6,30 +6,36 @@ from .models import SavedText
 
 # Create your views here.
 def view_shared_text(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         saved_text = list(SavedText.objects.all())
         if not saved_text:
             form = TextShare()
         else:
             form = TextShare(instance=saved_text[0])
 
-        return render(request, template_name='text_share/text_share.html', context={'form': form})
+        return render(
+            request, template_name="text_share/text_share.html", context={"form": form}
+        )
 
-    elif request.method == 'POST':
+    elif request.method == "POST":
         form = TextShare(request.POST)
 
         if form.is_valid():
             a = SavedText.objects.get(pk=1)
             TextShare(request.POST, instance=a).save()
 
-        return render(request, template_name='text_share/text_share.html', context={'form': form})
+        return render(
+            request, template_name="text_share/text_share.html", context={"form": form}
+        )
 
 
 def refresh_text(request):
     text = list(SavedText.objects.all())
 
     if not text:
-        return JsonResponse(data={}, status=HTTPStatus.NOT_FOUND, reason="No Saved Text Found!!")
+        return JsonResponse(
+            data={}, status=HTTPStatus.NOT_FOUND, reason="No Saved Text Found!!"
+        )
 
     text_data = {"text": text[0].content}
 
