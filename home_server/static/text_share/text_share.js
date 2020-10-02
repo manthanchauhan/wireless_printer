@@ -2,9 +2,8 @@ let textUpdateTime = null;
 
 window.onload = function (){
     setTextUpdateTime();
-    console.log(textUpdateTime);
 
-    setInterval(updateTextAge, 10000);
+    setInterval(updateTextAge, 60000);
 }
 
 function copyText() {
