@@ -4,6 +4,7 @@ from http import HTTPStatus
 from .forms import TextShare
 from .models import SavedText
 
+
 # Create your views here.
 def view_shared_text(request):
     if request.method == "GET":
