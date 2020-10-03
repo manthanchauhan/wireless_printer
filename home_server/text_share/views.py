@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from http import HTTPStatus
 from .forms import TextShare
 from .models import SavedText
+from broadcast_service.server import HOST, PORT
 
 
 # Create your views here.
@@ -15,7 +16,9 @@ def view_shared_text(request):
             form = TextShare(instance=saved_text[0])
 
         return render(
-            request, template_name="text_share/text_share.html", context={"form": form}
+            request,
+            template_name="text_share/text_share.html",
+            context={"form": form, "server_socket": {"host": HOST, "port": PORT}},
         )
 
     elif request.method == "POST":

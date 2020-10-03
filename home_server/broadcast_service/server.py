@@ -9,7 +9,10 @@ available_clients = []
 
 def _start_server_socket():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
-        server_socket.bind((HOST, PORT))
+        try:
+            server_socket.bind((HOST, PORT))
+        except OSError:
+            return
 
         server_socket.listen(5)
         print("Listening...")
@@ -36,7 +39,3 @@ def start_server_socket():
 def broadcast_message(msg="Hello Word"):
     for client_socket, client_ip in available_clients:
         client_socket.send(bytes(msg, "utf-8"))
-
-
-# if __name__ == "__main__":
-#     start_server_socket()
