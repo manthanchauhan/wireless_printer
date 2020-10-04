@@ -1,9 +1,12 @@
 let textUpdateTime = null;
+let socket = null
 
 window.onload = function (){
     setTextUpdateTime();
 
     setInterval(updateTextAge, 60000);
+
+    connectToServerSocket();
 }
 
 function copyText() {
@@ -78,4 +81,17 @@ function updateTextAge() {
 
     document.getElementById("textAge").innerText = ageText;
     document.getElementById("textAge").style.color = color;
+}
+
+function connectToServerSocket() {
+    socket = new WebSocket("ws://" + "192.168.0.13" + ":" + "1234");
+
+    console.log("Connected!");
+
+    socket.onmessage = function (event){
+        let text_field = document.getElementById("id_content");
+        text_field.innerHTML = event.data;
+        textUpdateTime = new Date().getTime();
+        updateTextAge();
+    }
 }
