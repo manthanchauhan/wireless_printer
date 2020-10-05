@@ -9,12 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
+    <script>
+        const refreshTextUrl = '{% url "text_share:refresh_text" %}';
+        const serverIp = `{{ server_socket.host }}`;
+        const serverPort = `{{ server_socket.port }}`;
+    </script>
+
     <div class="">
         <form method="post" action="{% url 'text_share:text_share' %}">
             {% csrf_token %}
             {{form|crispy}}
 
-            <p>last updated: <span id="textAge" style="color: green;">Just now</span></p>
+            <p>last updated: <span id="textAge" style="color: green;">Just now {{ server_socket.host }}</span></p>
 
             <button type="submit" class="btn btn-success">Share</button>
             <button type="button" class="btn btn-primary" onclick="copyText();">Copy</button>
@@ -25,8 +31,5 @@
     </div>
 </body>
 
-<script>
-    const refreshTextUrl = '{% url "text_share:refresh_text" %}';
-</script>
 <script type="application/javascript" src="{% static 'text_share/text_share.js' %}"></script>
 </html>
