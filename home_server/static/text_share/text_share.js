@@ -1,5 +1,6 @@
 let textUpdateTime = null;
 let socket = null
+let authSuccess = false;
 
 window.onload = function (){
     setTextUpdateTime();
@@ -86,11 +87,32 @@ function updateTextAge() {
 function connectToServerSocket() {
     socket = new WebSocket("ws://" + "192.168.0.13" + ":" + "1234");
 
-    console.log("Connected!");
+    socket.onopen = function () {
+        console.log("Connected!");
+
+        let auth_data = new Map([
+            ["type", "client"]
+        ]);
+
+        const auth_data_json = JSON.stringify(Object.fromEntries(auth_data));
+        socket.send(auth_data_json);
+    }
 
     socket.onmessage = function (event){
+        let recvData = JSON.parse(event.data);
+
+        if ("success" in recvData){
+            if (recvData.success)
+                console.log("Authenticated");
+            else
+                console.log("Authentication Denied");
+
+            authSuccess = recvData.success;
+            return;
+        }
+
         let text_field = document.getElementById("id_content");
-        text_field.innerHTML = event.data;
+        text_field.innerHTML = recvData.text;
         textUpdateTime = new Date().getTime();
         updateTextAge();
     }
