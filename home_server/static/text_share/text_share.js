@@ -7,7 +7,7 @@ window.onload = function (){
 
     setInterval(updateTextAge, 60000);
 
-    connectToServerSocket();
+    setInterval(checkWebSocketConnection, 1000);
 }
 
 function copyText() {
@@ -115,5 +115,14 @@ function connectToServerSocket() {
         text_field.innerHTML = recvData.text;
         textUpdateTime = new Date().getTime();
         updateTextAge();
+    }
+}
+
+function checkWebSocketConnection() {
+    if (socket === null){
+        connectToServerSocket();
+    }
+    if (socket.readyState === 3){
+        connectToServerSocket();
     }
 }
